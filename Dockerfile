@@ -7,12 +7,10 @@ ARG KCTL_VERSION=v1.14.0
 VOLUME /rke
 WORKDIR /rke
 
-RUN apk add --upgrade --no-cache curl  nano
+RUN apk add --upgrade --no-cache curl nano && \
+    curl -L -o /usr/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/${KCTL_VERSION}/linux/amd64/kubectl && \
+    chmod +x /usr/bin/kubectl && \
+    curl -L -o /usr/bin/rke  https://github.com/rancher/rke/releases/download/${RKE_VERSION}/rke_linux-amd64 && \
+    chmod +x /usr/bin/rke
 
-RUN curl -L -o /usr/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/${KCTL_VERSION}/linux/amd64/kubectl && \
-  chmod +x /usr/bin/kubectl 
-
-RUN curl -L -o /usr/bin/rke  https://github.com/rancher/rke/releases/download/${RKE_VERSION}/rke_linux-amd64 && \
-  chmod +x /usr/bin/rke 
-  
 CMD ["/bin/sh"]
