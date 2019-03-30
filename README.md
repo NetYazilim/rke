@@ -7,9 +7,10 @@ Rancher Kubernetes Engine (RKE) is a light-weight Kubernetes installer that supp
 [kubectl Documentation](https://kubernetes.io/docs/reference/kubectl/overview/)
 
 ````
-docker run -ti -v C:\k8s\:/rke  netyazilim/rke
+docker run -ti -v C:\k8s\:/rke -w /rke netyazilim/rke
 
 Connection test:
-ssh -i <private_key> <user>@<ip>
-
+cp /rke/<private_key> /tmp/<private_key>
+chmod 400 /tmp/<private_key>
+ssh -i /tmp/<private_key> <user>@<ip>
 ````
